@@ -1,0 +1,22 @@
+﻿<Window x:Class="FinanceAppGUI.TransactionEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FinanceAppGUI"
+        mc:Ignorable="d"
+           Title="Transaction Editor" Height="450" Width="300">
+    <StackPanel x:Name="panel">
+        <Label Content="Name"/>
+        <TextBox Padding="10" Margin="10" Text="{Binding TransactionToEdit.Name, UpdateSourceTrigger=Explicit}"/>
+        <Label Content="Category"/>
+        <ComboBox Margin="10" Padding="10"
+        ItemsSource="{Binding Category}"
+      SelectedItem="{Binding TransactionToEdit.Category, Mode=TwoWay}"
+    />
+        <Label Content="Amount" />
+        <TextBox Padding="10" Margin="10" Text="{Binding TransactionToEdit.Amount, UpdateSourceTrigger=Explicit}"/>
+        <Button Content="Save" Padding="10" Margin="10" Background="LightGreen" Click="Button_Click_Save"/>
+        <Button Content="Cancel" Padding="10" Margin="10" Background="LightPink" Click="Button_Click_Cancel"/>
+    </StackPanel>
+</Window>
