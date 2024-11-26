@@ -10,10 +10,11 @@
         <Label Content="Name"/>
         <TextBox Padding="10" Margin="10" Text="{Binding TransactionToEdit.Name, UpdateSourceTrigger=Explicit}"/>
         <Label Content="Category"/>
+        
         <ComboBox Margin="10" Padding="10"
         ItemsSource="{Binding Category}"
-      SelectedItem="{Binding TransactionToEdit.Category, Mode=TwoWay}"
-    />
+        SelectedItem="{Binding TransactionToEdit.Category, Mode=TwoWay}"/>
+        
         <Label Content="Amount" />
         <TextBox Padding="10" Margin="10" Text="{Binding TransactionToEdit.Amount, UpdateSourceTrigger=Explicit}"/>
         <Button Content="Save" Padding="10" Margin="10" Background="LightGreen" Click="Button_Click_Save"/>

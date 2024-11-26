@@ -38,6 +38,7 @@ namespace FinanceAppGUI
                 if (item is ComboBox cb)
                 {
                     cb.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
+                    
                 }
             }
             this.DialogResult = true;

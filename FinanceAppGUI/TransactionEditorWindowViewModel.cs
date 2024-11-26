@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FinanceAppGUI
 {
-    public class TransactionEditorWindowViewModel:ObservableObject
+    public class TransactionEditorWindowViewModel : ObservableObject
     {
         private Transaction transactionToEdit;
         public List<string> Category { get { return new List<string>() { "Expense", "Income" }; } }

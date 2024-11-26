@@ -1,5 +1,6 @@
-﻿using System.Configuration;
-using System.Data;
+﻿using CommunityToolkit.Mvvm.DependencyInjection;
+using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 
 namespace FinanceAppGUI
@@ -9,6 +10,16 @@ namespace FinanceAppGUI
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            Ioc.Default.ConfigureServices(
+                new ServiceCollection()
+                .AddSingleton<ITransactionLogic, TransactionLogic>()
+                .AddSingleton<ITransactionEditorService, TransactionEditorViaWindow>()
+                .AddSingleton<IMessenger>(WeakReferenceMessenger.Default)
+                .BuildServiceProvider()
+            );
+        }
     }
 
 }
