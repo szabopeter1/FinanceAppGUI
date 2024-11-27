@@ -9,7 +9,7 @@ using System.Windows.Controls.Primitives;
 
 namespace FinanceAppGUI
 {
-    public class TransactionLogic :ITransactionLogic
+    public class TransactionLogic : ITransactionLogic
     {
         IList<Transaction> expense;
         IList<Transaction> income;
@@ -47,26 +47,22 @@ namespace FinanceAppGUI
 
         public void EditTransaction(Transaction t)
         {
-            bool save=editorService.EditTransaction(t);
+            bool save = editorService.EditTransaction(t);
             string originalCategory = t.Category;
-            var editor = new TransactionEditorWindow(t);
 
-            if (editor.ShowDialog() == true)
+            if (originalCategory != t.Category)
             {
-                if (originalCategory != t.Category)
+                if (originalCategory == "Income")
                 {
-                    if (originalCategory == "Income")
-                    {
-                        income.Remove(t);
-                        expense.Add(t);
-                    }
-                    else if (originalCategory == "Expense")
-                    {
-                        expense.Remove(t);
-                        income.Add(t);
-                    }
-                    MessageBox.Show("Save successful");
+                    income.Remove(t);
+                    expense.Add(t);
                 }
+                else if (originalCategory == "Expense")
+                {
+                    expense.Remove(t);
+                    income.Add(t);
+                }
+                MessageBox.Show("Save successful");
             }
         }
 
@@ -84,10 +80,10 @@ namespace FinanceAppGUI
 
         public int Balance()
         {
-           int inc_temp= income.Count != 0 ? income.Sum(a => a.Amount) : 0;
-           int exp_temp= expense.Count != 0 ? expense.Sum(a => a.Amount) : 0;
+            int inc_temp = income.Count != 0 ? income.Sum(a => a.Amount) : 0;
+            int exp_temp = expense.Count != 0 ? expense.Sum(a => a.Amount) : 0;
 
-           return inc_temp - exp_temp;
-        }       
+            return inc_temp - exp_temp;
+        }
     }
 }
