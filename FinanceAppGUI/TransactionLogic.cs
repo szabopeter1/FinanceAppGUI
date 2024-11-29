@@ -63,7 +63,7 @@ namespace FinanceAppGUI
                     income.Add(t);
                 }
             }
-            
+
             messenger.Send("Transation changed", "TransactionInfo");
         }
 
