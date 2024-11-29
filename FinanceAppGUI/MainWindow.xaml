@@ -64,9 +64,11 @@
             </ListBox>
         </StackPanel>
 
-        <DockPanel VerticalAlignment="Center">
+        <StackPanel VerticalAlignment="Center">
             <Label Content="{Binding Balance}" FontSize="14" FontWeight="Bold" ContentStringFormat="Balance: {0}Ft"/>
-        </DockPanel>
+            <Button Content="Export" Command="{Binding ExportCommand}" Margin="20" />
+            <Button Content="Import" Command="{Binding ImportCommand}" Margin="20" />
+        </StackPanel>
 
     </Grid>
 </Window>
