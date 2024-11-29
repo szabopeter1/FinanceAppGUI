@@ -20,5 +20,9 @@ namespace FinanceAppGUI
             { return transactionToEdit; }
             set { SetProperty(ref transactionToEdit, value); }
         }
+
+        public bool IsValid =>
+            !string.IsNullOrWhiteSpace(TransactionToEdit.Category) &&
+            !string.IsNullOrWhiteSpace(TransactionToEdit.Name)&& !double.IsNaN(transactionToEdit.Amount);
     }
 }

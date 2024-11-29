@@ -29,26 +29,34 @@ namespace FinanceAppGUI
 
         private void Button_Click_Save(object sender, RoutedEventArgs e)
         {
-            foreach (var item in panel.Children)
+            if (DataContext is TransactionEditorWindowViewModel vm && vm.IsValid)
             {
-                if (item is TextBox t)
+                foreach (var item in panel.Children)
                 {
-                    t.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                    if (item is TextBox t)
+                    {
+                        t.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                    }
+                    if (item is ComboBox cb)
+                    {
+                        cb.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
+
+                    }
                 }
-                if (item is ComboBox cb)
-                {
-                    cb.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
-                    
-                }
+                this.DialogResult = true;
             }
-            this.DialogResult = true;
+            else
+            {
+                MessageBox.Show("The transaction must have a valid category, name and amount!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)
         {
+            
             this.DialogResult = false;
         }
 
-        
+
     }
 }

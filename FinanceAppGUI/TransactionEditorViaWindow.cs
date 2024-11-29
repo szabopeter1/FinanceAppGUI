@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace FinanceAppGUI
 {
     public class TransactionEditorViaWindow : ITransactionEditorService
     {
-        
+
         public bool EditTransaction(Transaction t)
         {
             var editor = new TransactionEditorWindow(t);

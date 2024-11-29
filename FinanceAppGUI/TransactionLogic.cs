@@ -33,16 +33,18 @@ namespace FinanceAppGUI
         {
             Transaction t = new Transaction();
             bool save = editorService.EditTransaction(t);
-
-            if (save && t.Category == "Expense")
-            {
-                expense.Add(t);
+            if(!string.IsNullOrWhiteSpace(t.Category) && !string.IsNullOrWhiteSpace(t.Name))
+            { 
+                if (save && t.Category == "Expense")
+                {
+                    expense.Add(t);
+                }
+                else
+                {
+                    income.Add(t);
+                }
+                messenger.Send("Transaction added", "TransactionInfo");
             }
-            else
-            {
-                income.Add(t);
-            }
-            messenger.Send("Transaction added", "TransactionInfo");
         }
 
         public void EditTransaction(Transaction t)

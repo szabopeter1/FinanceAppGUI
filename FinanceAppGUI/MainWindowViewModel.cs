@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -66,15 +67,15 @@ namespace FinanceAppGUI
         {
 
         }
-        
+
         public MainWindowViewModel(ITransactionLogic logic)
         {
             Income = new ObservableCollection<Transaction>();
             Expense = new ObservableCollection<Transaction>();
             this.logic = logic;
             logic.SetupCollections(Income, Expense);
-            Income.Add(new Transaction() { Name = "Salary", Amount = 10000 ,Category="Income"  });
-            Expense.Add(new Transaction() { Name = "Shopping", Amount = 5000, Category="Expense" });
+            Income.Add(new Transaction() { Name = "Salary", Amount = 10000, Category = "Income" });
+            Expense.Add(new Transaction() { Name = "Shopping", Amount = 5000, Category = "Expense" });
 
             NewCommand = new RelayCommand(
               () =>
@@ -82,7 +83,8 @@ namespace FinanceAppGUI
                   logic.NewTransaction();
               });
             RemoveCommand = new RelayCommand(
-                () => {
+                () =>
+                {
                     if (Selected.Category.Equals("Expense"))
                     {
                         logic.RemoveExpense(selected);
@@ -90,13 +92,14 @@ namespace FinanceAppGUI
                     else
                     {
                         logic.RemoveIncome(selected);
-                    }                   
+                    }
                 },
                 () => Selected != null
                 );
             EditCommand = new RelayCommand(
-                () => {
-                    logic.EditTransaction(selected);                  
+                () =>
+                {
+                    logic.EditTransaction(selected);
                 },
                 () => Selected != null
                 );
@@ -176,7 +179,6 @@ namespace FinanceAppGUI
 
                         else if (result == MessageBoxResult.Cancel)
                         {
-                            // Felhasználó megszakította az importálást
                             return;
                         }
 
@@ -185,18 +187,21 @@ namespace FinanceAppGUI
                             string line;
                             // Fejléc átugrása
                             reader.ReadLine();
+                            if ((line = reader.ReadLine()) == null)
+                            {
+                                MessageBox.Show("The file empty", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                            }
 
                             while ((line = reader.ReadLine()) != null)
                             {
                                 var columns = line.Split(',');
 
-                                if (columns.Length != 3 || !double.TryParse(columns[2], out _))
+                                if (columns.Length > 3)
                                 {
-                                    MessageBox.Show($"Unknown format", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-                                    continue;
+                                    MessageBox.Show($"This file is not formatted correctly!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                   
                                 }
-
-                                if (columns.Length == 3)
+                                else
                                 {
                                     string category = columns[0].Trim();
                                     string name = columns[1].Trim();
@@ -205,7 +210,6 @@ namespace FinanceAppGUI
                                     if (category != "Income" && category != "Expense")
                                     {
                                         MessageBox.Show($"Unknown category: {category}", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-                                        continue;
                                     }
 
                                     var transaction = new Transaction
@@ -223,12 +227,12 @@ namespace FinanceAppGUI
                                     {
                                         Expense.Add(transaction);
                                     }
-
                                 }
+                                
                             }
-                        }
-
-                        MessageBox.Show("Import succesful!", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                            OnPropertyChanged(nameof(Balance));
+                            MessageBox.Show("Import finished!", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }                    
                     }
 
                 }
@@ -240,5 +244,6 @@ namespace FinanceAppGUI
             });
 
         }
+        
     }
 }
