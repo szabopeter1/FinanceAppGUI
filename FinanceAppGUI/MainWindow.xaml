@@ -58,17 +58,15 @@
                             <Label Content="{Binding Category}"/>
                         </StackPanel>
                     </DataTemplate>
-
+                    
                 </ListBox.ItemTemplate>
 
             </ListBox>
         </StackPanel>
 
-        <StackPanel VerticalAlignment="Center">
+        <DockPanel VerticalAlignment="Center">
             <Label Content="{Binding Balance}" FontSize="14" FontWeight="Bold" ContentStringFormat="Balance: {0}Ft"/>
-            <Button Content="Export" Command="{Binding ExportCommand}" Margin="20" />
-            <Button Content="Import" Command="{Binding ImportCommand}" Margin="20" />
-        </StackPanel>
+        </DockPanel>
 
     </Grid>
 </Window>

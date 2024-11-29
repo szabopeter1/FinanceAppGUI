@@ -78,10 +78,10 @@ namespace FinanceAppGUI
             messenger.Send("Expense removed", "TransactionInfo");
         }
 
-        public double Balance()
+        public int Balance()
         {
-            double inc_temp = income.Count != 0 ? income.Sum(a => a.Amount) : 0;
-            double exp_temp = expense.Count != 0 ? expense.Sum(a => a.Amount) : 0;
+            int inc_temp = income.Count != 0 ? income.Sum(a => a.Amount) : 0;
+            int exp_temp = expense.Count != 0 ? expense.Sum(a => a.Amount) : 0;
 
             return inc_temp - exp_temp;
         }

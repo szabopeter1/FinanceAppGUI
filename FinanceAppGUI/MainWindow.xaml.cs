@@ -21,5 +21,6 @@ namespace FinanceAppGUI
             InitializeComponent();
 
         }
+        
     }
 }

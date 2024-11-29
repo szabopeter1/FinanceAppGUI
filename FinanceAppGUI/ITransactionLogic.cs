@@ -7,6 +7,6 @@
         void RemoveIncome(Transaction t);
         void RemoveExpense(Transaction t);
         void SetupCollections(IList<Transaction> expense, IList<Transaction> income);
-        double Balance();
+        int Balance();
     }
 }
