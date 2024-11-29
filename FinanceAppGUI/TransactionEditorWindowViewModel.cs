@@ -12,17 +12,11 @@ namespace FinanceAppGUI
         private Transaction transactionToEdit;
         public List<string> Category { get { return new List<string>() { "Expense", "Income" }; } }
 
-
-
         public Transaction TransactionToEdit
         {
             get
             { return transactionToEdit; }
             set { SetProperty(ref transactionToEdit, value); }
-        }
-
-        public bool IsValid =>
-            !string.IsNullOrWhiteSpace(TransactionToEdit.Category) &&
-            !string.IsNullOrWhiteSpace(TransactionToEdit.Name)&& !double.IsNaN(transactionToEdit.Amount);
+        }  
     }
 }
