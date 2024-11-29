@@ -8,6 +8,7 @@ namespace FinanceAppGUI
 {
     public class TransactionEditorViaWindow : ITransactionEditorService
     {
+        
         public bool EditTransaction(Transaction t)
         {
             var editor = new TransactionEditorWindow(t);

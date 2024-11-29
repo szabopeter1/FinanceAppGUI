@@ -47,8 +47,8 @@ namespace FinanceAppGUI
 
         public void EditTransaction(Transaction t)
         {
-            bool save = editorService.EditTransaction(t);
             string originalCategory = t.Category;
+            bool save = editorService.EditTransaction(t);
 
             if (originalCategory != t.Category)
             {
