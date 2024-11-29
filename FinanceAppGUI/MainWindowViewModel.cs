@@ -112,7 +112,6 @@ namespace FinanceAppGUI
 
             ExportCommand = new RelayCommand(() =>
             {
-
                 try
                 {
                     Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
@@ -120,14 +119,11 @@ namespace FinanceAppGUI
                     dlg.DefaultExt = ".csv"; // Default file extension
                     dlg.Filter = "CSV Files (*.csv)|*.csv"; // Filter files by extension
 
-
-
-                    // Process save file dialog box results
                     if (dlg.ShowDialog() == true)
                     {
                         using (var writer = new StreamWriter(dlg.FileName))
                         {
-                            writer.WriteLine("Category,Name,Amount"); // Fejléc
+                            writer.WriteLine("Category,Name,Amount"); // Header
                             foreach (var transaction in Income)
                             {
                                 writer.WriteLine($"Income,{transaction.Name},{transaction.Amount}");
@@ -144,26 +140,20 @@ namespace FinanceAppGUI
                 {
                     MessageBox.Show($"Error occurred during export: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-
             });
 
             ImportCommand = new RelayCommand(() =>
             {
-
                 try
                 {
                     Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-
                     // Set filter for file extension and default file extension 
                     dlg.DefaultExt = ".csv";
                     dlg.Filter = "CSV Files (*.csv)|*.csv";
 
-
-                    // Process open file dialog box results
                     if (dlg.ShowDialog() == true)
                     {
-
-                        // Kérdés az adatok felülírásáról
+                        // Ask to overwrite the existing transactions
                         var result = MessageBox.Show(
                             "Overwrite?",
                             "Overwrite",
@@ -172,7 +162,7 @@ namespace FinanceAppGUI
 
                         if (result == MessageBoxResult.Yes)
                         {
-                            // Gyűjtemények ürítése
+                            // Collections clear
                             Income.Clear();
                             Expense.Clear();
                         }
@@ -185,7 +175,7 @@ namespace FinanceAppGUI
                         using (var reader = new StreamReader(dlg.FileName))
                         {
                             string line;
-                            // Fejléc átugrása
+                            // Skip header
                             reader.ReadLine();
                             if ((line = reader.ReadLine()) == null)
                             {
@@ -199,7 +189,6 @@ namespace FinanceAppGUI
                                 if (columns.Length > 3)
                                 {
                                     MessageBox.Show($"This file is not formatted correctly!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-                                   
                                 }
                                 else
                                 {
@@ -228,22 +217,17 @@ namespace FinanceAppGUI
                                         Expense.Add(transaction);
                                     }
                                 }
-                                
                             }
-                            OnPropertyChanged(nameof(Balance));
+                            OnPropertyChanged(nameof(Balance)); // Update balance
                             MessageBox.Show("Import finished!", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
-                        }                    
+                        }
                     }
-
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Error occurred during import: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-
             });
-
         }
-        
     }
 }
