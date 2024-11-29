@@ -26,7 +26,6 @@ namespace FinanceAppGUI
         public ICollectionView IncomeView => CollectionViewSource.GetDefaultView(Income);
         public ICollectionView ExpenseView => CollectionViewSource.GetDefaultView(Expense);
 
-
         private Transaction selected;
 
         public Transaction Selected

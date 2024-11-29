@@ -20,6 +20,14 @@ namespace FinanceAppGUI
         {
             InitializeComponent();
 
+            var brush = new ImageBrush
+            {
+                ImageSource = new BitmapImage(new Uri("money.jpg", UriKind.Relative)),
+                Opacity = 0.2,
+                Stretch = Stretch.UniformToFill
+            };
+
+            grid.Background = brush;
         }
         
     }

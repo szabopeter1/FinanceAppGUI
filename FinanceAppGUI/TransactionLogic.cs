@@ -62,8 +62,9 @@ namespace FinanceAppGUI
                     expense.Remove(t);
                     income.Add(t);
                 }
-                MessageBox.Show("Save successful");
             }
+            
+            messenger.Send("Transation changed", "TransactionInfo");
         }
 
         public void RemoveIncome(Transaction t)
