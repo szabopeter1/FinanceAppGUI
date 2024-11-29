@@ -11,7 +11,7 @@ namespace FinanceAppGUI
     {
         private string name;
         private string category;
-        private int amount;
+        private double amount;
 
         public string Name
         {
@@ -25,7 +25,7 @@ namespace FinanceAppGUI
             set { SetProperty(ref category, value); }
         }
 
-        public int Amount
+        public double Amount
         {
             get { return amount; }
             set { SetProperty(ref amount, value); }
