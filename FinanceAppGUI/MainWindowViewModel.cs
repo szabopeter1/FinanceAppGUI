@@ -74,9 +74,7 @@ namespace FinanceAppGUI
             Expense = new ObservableCollection<Transaction>();
             this.logic = logic;
             logic.SetupCollections(Income, Expense);
-            Income.Add(new Transaction() { Name = "Salary", Amount = 10000, Category = "Income" });
-            Expense.Add(new Transaction() { Name = "Shopping", Amount = 5000, Category = "Expense" });
-
+            
             NewCommand = new RelayCommand(
               () =>
               {
