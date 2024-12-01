@@ -180,7 +180,7 @@ namespace FinanceAppGUI
                                 MessageBox.Show("The file empty", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
                             }
 
-                            while ((line = reader.ReadLine()) != null)
+                            do
                             {
                                 var columns = line.Split(',');
 
@@ -216,6 +216,7 @@ namespace FinanceAppGUI
                                     }
                                 }
                             }
+                            while ((line = reader.ReadLine()) != null);
                             OnPropertyChanged(nameof(Balance)); // Update balance
                             MessageBox.Show("Import finished!", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
                         }

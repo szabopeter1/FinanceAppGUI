@@ -15,7 +15,9 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
         <StackPanel Grid.Column="0" Grid.Row="0">
             <Button Content="New Transaction" VerticalAlignment="Top" Padding= "10" Margin="5" Command="{Binding NewCommand}"/>
             <Separator Height="30" Background="Transparent"/>
@@ -28,8 +30,7 @@
             <Label Content="Expense" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" FontFamily="Comic Sans MS"/>
             <ListBox ItemsSource="{Binding ExpenseView}"
                      SelectedItem="{Binding Selected}"
-                     HorizontalContentAlignment="Stretch">
-
+                     HorizontalContentAlignment="Stretch" MaxHeight="620">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -38,16 +39,16 @@
                             <Label Content="{Binding Category}"/>
                         </StackPanel>
                     </DataTemplate>
-
                 </ListBox.ItemTemplate>
             </ListBox>
         </StackPanel>
-
+       
         <StackPanel Grid.Row="0" Grid.Column="2">
             <Label Content="Income" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" FontFamily="Comic Sans MS"/>
+
             <ListBox ItemsSource="{Binding IncomeView}" 
                      SelectedItem="{Binding Selected}"
-                     HorizontalContentAlignment="Stretch">
+                     HorizontalContentAlignment="Stretch" MaxHeight="620">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -56,9 +57,7 @@
                             <Label Content="{Binding Category}"/>
                         </StackPanel>
                     </DataTemplate>
-                    
                 </ListBox.ItemTemplate>
-
             </ListBox>
         </StackPanel>
 
@@ -67,6 +66,5 @@
             <Button Content="Export" Command="{Binding ExportCommand}" Margin="20" />
             <Button Content="Import" Command="{Binding ImportCommand}" Margin="20" />
         </StackPanel>
-
     </Grid>
 </Window>

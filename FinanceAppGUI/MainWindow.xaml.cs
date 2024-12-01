@@ -23,7 +23,7 @@ namespace FinanceAppGUI
             var brush = new ImageBrush
             {
                 ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/money.jpg")),
-                Opacity = 0.2,
+                Opacity = 0.3,
                 Stretch = Stretch.UniformToFill
             };
 
